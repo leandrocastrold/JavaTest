@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 public class FreteInputDTO {
 
      @DecimalMin(value = "0.001", message = "O Valor de Peso deve ser acima de ZERO")
-     private double peso;
+     private Double peso;
      @NotBlank(message = "Campo cepOrigem não pode ser vazio")
      @NotNull
      private String cepOrigem;

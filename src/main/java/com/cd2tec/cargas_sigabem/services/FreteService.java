@@ -108,6 +108,7 @@ public class FreteService {
             String resposta = Util.converteJsonParaString(br);
             Gson gson = new Gson();
             endereco = gson.fromJson(resposta, Endereco.class);
+            System.out.println(endereco);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception ex) {

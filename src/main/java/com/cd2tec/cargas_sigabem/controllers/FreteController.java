@@ -27,7 +27,7 @@ public class FreteController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Frete> listarPorId(Long id){
+    public ResponseEntity<Frete> listarPorId(@PathVariable Long id){
         return new ResponseEntity<>(service.listarPorId(id), HttpStatus.OK);
     }
 

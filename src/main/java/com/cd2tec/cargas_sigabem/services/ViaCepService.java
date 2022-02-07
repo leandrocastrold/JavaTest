@@ -1,8 +1,13 @@
 package com.cd2tec.cargas_sigabem.services;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+@Component
+@Qualifier("principal")
 public class ViaCepService implements CepService {
 
     private final String APIURL = "https://viacep.com.br/ws/";

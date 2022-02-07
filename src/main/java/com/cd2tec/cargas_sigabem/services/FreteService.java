@@ -29,7 +29,6 @@ public class FreteService {
     @Autowired
     private FreteRepository repository;
 
-    @Qualifier("principal")
     @Autowired
     private CepService cepService;
 

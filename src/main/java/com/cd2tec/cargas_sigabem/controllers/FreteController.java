@@ -25,7 +25,6 @@ public class FreteController {
         return new ResponseEntity<>(service.listar(), HttpStatus.OK);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<Frete> listarPorId(@PathVariable Long id){
         return new ResponseEntity<>(service.listarPorId(id), HttpStatus.OK);
@@ -33,14 +32,7 @@ public class FreteController {
 
     @PostMapping()
     public ResponseEntity<FreteOutputDTO> postar(@RequestBody @Valid FreteInputDTO dto){
-        return new ResponseEntity<>(service.calcularFrete(dto), HttpStatus.CREATED);
+        return service.iniciarCalculoDeFreteAPartirDoInputDTO(dto);
     }
-
-    @PutMapping("/{id}/edit")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizar(@RequestBody Long id){
-
-    }
-
 
 }

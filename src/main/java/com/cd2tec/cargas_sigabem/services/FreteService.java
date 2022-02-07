@@ -8,6 +8,7 @@ import com.cd2tec.cargas_sigabem.repositories.FreteRepository;
 import com.cd2tec.cargas_sigabem.utils.Util;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,9 @@ public class FreteService {
     @Autowired
     private FreteRepository repository;
 
-    private final String apiUrl = "https://viacep.com.br/ws/";
+    @Qualifier("principal")
+    @Autowired
+    private CepService cepService;
 
     public List<Frete> listar() {
         List<Frete> fretes = repository.findAll();
@@ -94,7 +97,7 @@ public class FreteService {
 
     private ResponseEntity<Endereco> localizarEnderecoPeloCEP(String cep) throws Exception {
         Endereco endereco = null;
-        HttpURLConnection connection = verificarConexao(cep);
+        HttpURLConnection connection = cepService.consultarCep(cep);
 
         BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
         String resposta = Util.converteJsonParaString(br);
@@ -127,19 +130,19 @@ public class FreteService {
         return new FreteOutputDTO(valorFinal, dataDeEntrega, inputDTO.getCepOrigem(), inputDTO.getCepDestino());
     }
 
-    private HttpURLConnection verificarConexao(String cep) throws Exception {
-        try {
-            URL url = new URL(apiUrl + cep + "/json");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            if (connection.getResponseCode() != 200) {
-                throw new RuntimeException("HTTP error code : " + connection.getResponseCode());
-            }
-            return connection;
-        } catch (Exception e) {
-            throw new Exception("ERRO: " + e.getMessage());
-        }
-    }
+//    private HttpURLConnection verificarConexao(String cep) throws Exception {
+//        try {
+//            URL url = new URL(apiUrl + cep + "/json");
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//
+//            if (connection.getResponseCode() != 200) {
+//                throw new RuntimeException("HTTP error code : " + connection.getResponseCode());
+//            }
+//            return connection;
+//        } catch (Exception e) {
+//            throw new Exception("ERRO: " + e.getMessage());
+//        }
+//    }
 
     private Boolean verificarSeEstadosSaoIguais(String uf1, String uf2) {
         if (uf1.compareTo(uf2) == 0) {

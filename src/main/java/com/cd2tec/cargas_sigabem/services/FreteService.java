@@ -35,13 +35,13 @@ public class FreteService {
         return fretes;
     }
 
-    public Frete listarPorId(Long id) {
+    public ResponseEntity<Frete> listarPorId(Long id) {
         Optional<Frete> optional = repository.findById(id);
         if (optional.isPresent()) {
             Frete frete = optional.get();
-            return frete;
+            return new ResponseEntity<>(frete, HttpStatus.OK);
         }
-        return new Frete();
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     public void salvar(FreteInputDTO inputDTO, FreteOutputDTO outputDTO) {

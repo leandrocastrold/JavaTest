@@ -1,6 +1,23 @@
+<hr/>
+
+### Banco de dados MySQL
+
+Para inicializar o conteiner **Docker** com o banco de dados **MySQL**, digite:<br/>
+```docker compose up```
+
+### Informações sobre a API
+
+Essa API utiliza o **Swagger** para documentação. Acesse: <br/>
+http://localhost:8080/swagger-ui.html
+
+<hr/>
+
 # Teste de seleção para vaga de Java
 
 ## Faça um fork desse projeto e siga as instruções a seguir utilizando esse projeto.
+
+
+
 
 # Pré-requisitos
 
